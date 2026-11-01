@@ -1,0 +1,9 @@
+# Secret keys - never upload
+.env
+
+# Python virtual environment (huge, and anyone can recreate it)
+venv/
+
+# Python cache files
+__pycache__/
+*.pyc

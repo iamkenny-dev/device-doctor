@@ -13,8 +13,8 @@ Frontline workers in retail, warehouses and logistics depend on handheld compute
 What the agent does
 You: Device TC52-001 dies before lunch every day, what should I do?
 
-  🔧 get_device_status({'device_id': 'TC52-001'})
-  🔧 search_knowledge_base({'keyword': 'battery'})
+🔧 get_device_status({'device_id': 'TC52-001'})
+🔧 search_knowledge_base({'keyword': 'battery'})
 
 Device Doctor: Your device's battery health is at 58% (below the 70% threshold)
 and needs replacing...
@@ -36,9 +36,9 @@ This is the agent loop:
 Send the question, plus descriptions of the available tools, to the LLM.
 If the LLM requests a tool, run it and send the result back.
 Repeat until the LLM returns a final answer.
-Tool	Purpose
-get_device_status	Returns battery health, OS version, days since last sync and error codes for a device ID
-search_knowledge_base	Finds troubleshooting articles by keyword
+Tool Purpose
+get_device_status Returns battery health, OS version, days since last sync and error codes for a device ID
+search_knowledge_base Finds troubleshooting articles by keyword
 What I learned: reducing hallucination
 
 The first version gave confident answers that included steps not in the knowledge base (specific button menus and LED colours from the model's general training). It also reported only the first problem it found and ignored a device that hadn't synced in 9 days.
@@ -60,7 +60,7 @@ bash
 git clone https://github.com/iamkenny-dev/device-doctor.git
 cd device-doctor
 python -m venv venv
-venv\Scripts\activate            # Mac/Linux: source venv/bin/activate
+venv\Scripts\activate # Mac/Linux: source venv/bin/activate
 pip install openai python-dotenv
 
 Create a .env file (see .env.example):
@@ -75,13 +75,13 @@ python agent.py
 The code uses the OpenAI-compatible API format, so it also runs on Groq, OpenRouter or other providers by changing the base_url, key and model name.
 
 Roadmap
- Agent loop with tool calling
- Prompt rules to reduce hallucination
- create_service_ticket tool to escalate unresolved issues
- Replace mock data with a real knowledge base (RAG) — Week 2
- Web UI and voice input
+Agent loop with tool calling
+Prompt rules to reduce hallucination
+create_service_ticket tool to escalate unresolved issues
+Replace mock data with a real knowledge base (RAG) — Week 2
+Web UI and voice input
 Notes
 
 All device data and knowledge base articles are mock data created for learning. This is a personal learning project and not an official product of any company.
 
-Built by Kehinde Adelakun, Sales Engineer · https://LinkedIn.com/ln/kehindeadelakun
+Built by Kehinde Adelakun, Sales Engineer · https://www.linkedin.com/in/adelakunkehinde/

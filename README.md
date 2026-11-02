@@ -88,7 +88,7 @@ Run:
 python agent.py
 ```
 
-The code uses the OpenAI-compatible API format, so it also runs on Groq, OpenRouter or other providers by changing the `base_url`, key and model name.
+The code uses the OpenAI-compatible API format, so it also runs on Gemini, Groq, OpenRouter or other providers by changing the `base_url`, key and model name.
 
 ## Roadmap
 

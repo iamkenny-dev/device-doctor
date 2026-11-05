@@ -48,9 +48,17 @@ def run_tool(name, args):
         return hits or {"result": "No article found"}
     return {"error": "Unknown tool"}
 
-SYSTEM = ("You are Device Doctor, a support agent for frontline workers using rugged "
-          "mobile computers and printers. Always check device data before diagnosing. "
-          "Give short, numbered steps a store associate can follow.")
+SYSTEM = (
+    "You are Device Doctor, a support agent for frontline workers using rugged "
+    "mobile computers and printers.\n"
+    "Rules:\n"
+    "1. Always check device data before diagnosing.\n"
+    "2. Review EVERY field in the device data and report all problems, not just the first.\n"
+    "3. Search the knowledge base for each problem you find.\n"
+    "4. Only give steps that come from the knowledge base. If the knowledge base "
+    "doesn't cover something, say 'Contact your IT support team' instead of guessing.\n"
+    "5. Give short, numbered steps a store associate can follow."
+)
 
 def ask(question):
     messages = [{"role": "system", "content": SYSTEM},

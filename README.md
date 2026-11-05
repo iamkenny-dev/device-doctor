@@ -52,7 +52,7 @@ This is the **agent loop**:
 
 ## What I learned: reducing hallucination
 
-The first version gave confident answers that included steps **not in the knowledge base** (specific button menus and LED colours from the model's general training). It also reported only the first problem it found and ignored a device that hadn't synced in 9 days.
+The first version gave confident answers that included steps **not in the knowledge base** (specific button menus and LED colors from the model's general training). It also reported only the first problem it found and ignored a device that hadn't synced in 9 days.
 
 I fixed both with explicit rules in the system prompt:
 

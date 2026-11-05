@@ -15,6 +15,7 @@ DEVICES = {
     "TC52-001": {"model": "TC52", "battery_health_pct": 58, "os": "Android 11", "days_since_sync": 9},
     "TC501-002": {"model": "TC501", "battery_health_pct": 68, "os": "Android 11", "days_since_sync": 10},
     "TC701-003": {"model": "TC701", "battery_health_pct": 55, "os": "Android 11", "days_since_sync": 8},
+    "TC78-004": {"model": "TC78", "battery_health_pct": 59, "os": "Android 11", "days_since_sync": 6},
     "ZT411-007": {"model": "ZT411 printer", "printhead_km": 48, "last_error": "RIBBON OUT"},
 }
 KNOWLEDGE_BASE = {

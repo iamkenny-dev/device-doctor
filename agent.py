@@ -22,6 +22,15 @@ KNOWLEDGE_BASE = {
     "battery": "Battery health below 70% causes short runtime. Replace battery; enable battery swap mode.",
     "sync": "Devices not synced for 7+ days may miss OS/security updates. Check MDM enrollment and Wi-Fi.",
     "ribbon": "RIBBON OUT: reload ribbon, confirm ribbon side (ink in/out) matches printer settings.",
+    "scanner": "Frequent scan failures: 1. Clean the scanner exit window with a soft lint-free cloth. "
+               "2. Check the barcode is not damaged or poorly printed. 3. Hold the device 10-30 cm from the barcode. "
+               "4. If failures continue, escalate to IT for a scanner configuration check.",
+    "calibration": "Labels misaligned or PAPER OUT shown with labels loaded: 1. Open the printer and confirm the labels "
+                   "sit under the media guides. 2. Close the printer and run media calibration (hold the FEED button "
+                   "until the light flashes). 3. Print a test label.",
+    "wifi": "Frequent Wi-Fi disconnects: 1. Check whether disconnects happen in one store area (possible coverage gap). "
+            "2. Restart Wi-Fi on the device. 3. If disconnects continue across the store, escalate to IT to check "
+            "access points and roaming settings.",
 }
 
 # --- Tools (OpenAI format) ---

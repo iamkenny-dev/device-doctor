@@ -102,6 +102,19 @@ The code uses the OpenAI-compatible API format, so it also runs on Gemini, Groq,
 
 All device data and knowledge base articles are **mock data** created for learning. This is a personal learning project and not an official product of any company.
 
+
+<!-- ⚠️ Lesson 1: keyword search broke, as predicted
+
+Its first search was barcode, and it found nothing, because your article is named scanner. This is the exact limitation that Week 2’s RAG solves, where “barcode” and “scanner” would match by meaning. Write this down for your README; it’s a real example from your own agent.
+
+⚠️ Lesson 2: the agent is fishing
+
+Look at the last three searches: os, android, update. It can’t see what articles exist, so it’s guessing. That cost you 9 tool calls where 3 would do. In practice, each extra call makes the agent:
+
+slower: more round trips, and more chances of the timeout you hit earlier
+more expensive: it uses up free-tier quota, and on a paid tier every call costs money
+less reliable: more steps mean more places to go wrong -->
+
 ---
 
 Built by Kehinde Adelakun, Sales Engineer · https://www.linkedin.com/in/adelakunkehinde/

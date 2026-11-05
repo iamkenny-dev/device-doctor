@@ -7,6 +7,8 @@ load_dotenv()
 client = OpenAI(
     api_key=os.environ["GEMINI_API_KEY"],
     base_url="https://generativelanguage.googleapis.com/v1beta/openai/",
+    timeout=60,       # wait up to 60 seconds per request
+    max_retries=3,    # retry automatically if a request fails
 )
 MODEL = "gemini-3.8-flash"
 
@@ -92,4 +94,7 @@ if __name__ == "__main__":
         q = input("\nYou: ")
         if q.lower() in ("quit", "exit"):
             break
-        print("\nDevice Doctor:", ask(q))
+        try:
+            print("\nDevice Doctor:", ask(q))
+        except Exception as e:
+            print(f"\n⚠️ Device Doctor couldn't reach the AI service ({type(e).__name__}). Please try again.")

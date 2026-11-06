@@ -4,21 +4,40 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# client = OpenAI(
+#     api_key=os.environ["GEMINI_API_KEY"],
+#     base_url="https://generativelanguage.googleapis.com/v1beta/openai/",
+#     timeout=60,       # wait up to 60 seconds per request
+#     max_retries=3,    # retry automatically if a request fails
+# )
+
+# MODEL = "gemini-3.8-flash"
+
+PROVIDERS = {
+    "gemini": ("https://generativelanguage.googleapis.com/v1beta/openai/", "GEMINI_API_KEY", "gemini-3.8-flash"),
+    "groq": ("https://api.groq.com/openai/v1", "GROQ_API_KEY", "openai/gpt-oss-120b"),
+}
+PROVIDER = os.getenv("PROVIDER", "gemini")
+base_url, key_name, MODEL = PROVIDERS[PROVIDER]
+
 client = OpenAI(
-    api_key=os.environ["GEMINI_API_KEY"],
-    base_url="https://generativelanguage.googleapis.com/v1beta/openai/",
-    timeout=60,       # wait up to 60 seconds per request
-    max_retries=3,    # retry automatically if a request fails
+    api_key=os.environ[key_name],
+    base_url=base_url,
+    timeout=60,
+    max_retries=2,
 )
-MODEL = "gemini-3.8-flash"
+print(f"Using {PROVIDER} ({MODEL})")
 
 # --- Mock data ---
 DEVICES = {
     "TC52-001": {"model": "TC52", "battery_health_pct": 58, "os": "Android 11", "days_since_sync": 9},
-    "TC501-002": {"model": "TC501", "battery_health_pct": 68, "os": "Android 11", "days_since_sync": 10},
-    "TC701-003": {"model": "TC701", "battery_health_pct": 55, "os": "Android 11", "days_since_sync": 8},
-    "TC78-004": {"model": "TC78", "battery_health_pct": 59, "os": "Android 11", "days_since_sync": 6},
+    "TC501-002": {"model": "TC501", "battery_health_pct": 92, "os": "Android 14",
+                  "days_since_sync": 1, "scan_failures_today": 37},
+    "TC701-003": {"model": "TC701", "battery_health_pct": 88, "os": "Android 14",
+                  "days_since_sync": 2, "wifi_disconnects_today": 14},
+    "TC78-004": {"model": "TC78", "battery_health_pct": 95, "os": "Android 13", "days_since_sync": 0},
     "ZT411-007": {"model": "ZT411 printer", "printhead_km": 48, "last_error": "RIBBON OUT"},
+    "ZD421-008": {"model": "ZD421 label printer", "last_error": "PAPER OUT", "labels_misaligned": True},
 }
 KNOWLEDGE_BASE = {
     "battery": "Battery health below 70% causes short runtime. Replace battery; enable battery swap mode.",
@@ -45,7 +64,12 @@ TOOLS = [
                        "required": ["device_id"]}}},
     {"type": "function", "function": {
         "name": "search_knowledge_base",
-        "description": "Search troubleshooting articles by keyword, e.g. 'battery', 'sync', 'ribbon'.",
+        # "description": "Search troubleshooting articles by keyword, e.g. 'battery', 'sync', 'ribbon'.",
+        "description": (
+            "Search troubleshooting articles. Available topics: "
+            + ", ".join(KNOWLEDGE_BASE)
+            + ". Use only these exact keywords, one search per problem."
+),
         "parameters": {"type": "object",
                        "properties": {"keyword": {"type": "string"}},
                        "required": ["keyword"]}}},
@@ -69,6 +93,9 @@ SYSTEM = (
     "4. Only give steps that come from the knowledge base. If the knowledge base "
     "doesn't cover something, say 'Contact your IT support team' instead of guessing.\n"
     "5. Give short, numbered steps a store associate can follow."
+    "6. Only search topics that match a problem you actually found in the device data.\n"
+    "7. Copy steps from the knowledge base exactly. Do not add, expand or invent steps.\n"
+    "8. Keep the whole answer under 80 words. No tables. It will be read on a small handheld screen.\n"
 )
 
 def ask(question):

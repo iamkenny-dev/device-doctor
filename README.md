@@ -115,6 +115,16 @@ slower: more round trips, and more chances of the timeout you hit earlier
 more expensive: it uses up free-tier quota, and on a paid tier every call costs money
 less reliable: more steps mean more places to go wrong -->
 
+
+
+| Version | Change | Result |
+|---|---|---|
+| v1 | Basic agent | Invented LED and menu steps; missed the sync problem |
+| v2 | Rules: check every field, knowledge base only | Found all problems |
+| v3 | Topic list in the tool description | Tool calls cut from 9 → 3 |
+| v4 | Switched to Groq | Same prompt, worse rule-following; invented a step and attributed it to the knowledge base |
+| v5 | `temperature=0` + instruction in tool result | 2 calls, steps exactly as written, under 40 words |
+
 ---
 
 Built by Kehinde Adelakun, Sales Engineer · https://www.linkedin.com/in/adelakunkehinde/
